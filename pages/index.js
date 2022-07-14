@@ -5,6 +5,9 @@ import Navigation from '../Components/Navigation'
 export default function Home() {
   return (
     <div className="">
+      <Head>
+        <title>Coding Academy Marketplace | Inicio</title>
+      </Head>
       <Navigation />
     </div>
   )

@@ -1,46 +1,80 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const Navigation = () => {
   const [balance, setBalance] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full bg-neutral-100 grid grid-cols-3 p-2">
-      <div className="logo flex justify-start items-center">
-        <div className="relative h-16 w-40">
-          <Image
-            src="/logo.png"
-            alt="Coding Academy Logo"
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-        <div className="marketplace">
-          <h1 className="text-3xl font-primary font-bold text-neutral-800 tracking-tighter">
-            Marketplace
-          </h1>
-        </div>
-      </div>
+    <div className="w-full bg-neutral-100 grid grid-cols-2 md:grid-cols-3 py-2 md:px-2">
+      <Link href="/">
+        <a className="logo flex justify-start items-center">
+          <div className="relative h-14 md:h-16 w-40">
+            <Image
+              src="/logo.png"
+              alt="Coding Academy Logo"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
+          <div className="marketplace">
+            <span className="text-3xl hidden md:block font-primary font-bold text-neutral-800 tracking-tighter">
+              Marketplace
+            </span>
+          </div>
+        </a>
+      </Link>
       <div className="links justify-center items-center gap-4 hidden md:flex">
-        <Link href="/">
-          <a className="text-neutral-800 font-primary font-bold">Inicio</a>
-        </Link>
-        <Link href="/destacados">
-          <a className="text-neutral-800 font-primary font-bold">Destacados</a>
-        </Link>
-        <Link href="/mi-avatar">
-          <a className="text-neutral-800 font-primary font-bold">Mi Avatar</a>
-        </Link>
-        <Link href="/mi-perfil">
-          <a className="text-neutral-800 font-primary font-bold">Mi Perfil</a>
-        </Link>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            borderBottom: "2px solid rgba(0, 0, 0, 0.75)",
+          }}
+        >
+          <Link href="/">
+            <a className="text-neutral-800 font-primary font-bold">Inicio</a>
+          </Link>
+        </motion.div>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            borderBottom: "2px solid rgba(0, 0, 0, 0.75)",
+          }}
+        >
+          <Link href="/destacados">
+            <a className="text-neutral-800 font-primary font-bold">
+              Destacados
+            </a>
+          </Link>
+        </motion.div>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            borderBottom: "2px solid rgba(0, 0, 0, 0.75)",
+          }}
+        >
+          <Link href="/mi-avatar">
+            <a className="text-neutral-800 font-primary font-bold">Mi Avatar</a>
+          </Link>
+        </motion.div>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            borderBottom: "2px solid rgba(0, 0, 0, 0.75)",
+          }}
+        >
+          <Link href="/mi-perfil">
+            <a className="text-neutral-800 font-primary font-bold">Mi Perfil</a>
+          </Link>
+        </motion.div>
       </div>
       <div className="menu justify-end items-center gap-2 text-neutral-800 hidden md:flex">
         <div className="balance font-primary font-bold text-yellow-500">
           <p>Mis puntos: {balance}</p>
         </div>
-        <div className="settings">
+        <div className="settings cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-10 w-10"
@@ -54,7 +88,7 @@ const Navigation = () => {
             />
           </svg>
         </div>
-        <div className="profile">
+        <div className="profile cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-10 w-10"
@@ -68,6 +102,46 @@ const Navigation = () => {
             />
           </svg>
         </div>
+      </div>
+      <div
+        className="hamburger flex justify-end items-center md:hidden pr-4 cursor-pointer"
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      >
+        {isOpen ? (
+          <motion.svg
+            whileHover={{ scale: 1.1 }}
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-10 w-10"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </motion.svg>
+        ) : (
+          <motion.svg
+            whileHover={{ scale: 1.1 }}
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-10 w-10"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </motion.svg>
+        )}
       </div>
     </div>
   );
