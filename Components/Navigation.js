@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Navigation = () => {
+  const [balance, setBalance] = useState(0);
+
   return (
     <div className="w-full bg-neutral-100 grid grid-cols-3 p-2">
       <div className="logo flex justify-start items-center">
@@ -36,7 +38,7 @@ const Navigation = () => {
       </div>
       <div className="menu justify-end items-center gap-2 text-neutral-800 hidden md:flex">
         <div className="balance font-primary font-bold text-yellow-500">
-          <p>Mis puntos: {Math.floor(Math.random() * 10000)}</p>
+          <p>Mis puntos: {balance}</p>
         </div>
         <div className="settings">
           <svg
