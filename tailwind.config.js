@@ -11,6 +11,9 @@ module.exports = {
         secondary: "Space Grotesk, sans-serif",
         tertiary: "Inter, sans-serif",
       },
+      lineHeight: {
+        squish: "0.8"
+      }
     },
   },
   plugins: [],
