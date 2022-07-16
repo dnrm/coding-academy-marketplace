@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
+  id             String    @id @default(uuid())
   name           String
   lastName       String
   balance        Int
   profilePicture String?
-  joinDate       DateTime @default(now())
+  joinDate       DateTime  @default(now())
   products       Product[]
 }
 
