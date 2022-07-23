@@ -158,7 +158,7 @@ const Navigation = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="menu-mobile md:hidden w-full h-screen col-span-2 p-4">
+        <div className="menu-mobile md:hidden w-full col-span-2 p-4">
           <div className="balance font-primary font-bold text-yellow-500">
             <p>Mis puntos: {balance}</p>
           </div>

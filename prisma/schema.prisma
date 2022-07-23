@@ -17,15 +17,14 @@ model User {
   balance        Int
   profilePicture String?
   joinDate       DateTime  @default(now())
-  products       Product[]
+  products       String[]
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          String      @id @default(uuid())
   name        String
   price       Int
   description String?
   image       String
-  createdAt   DateTime @default(now())
-  users       User[]
+  createdAt   DateTime? @default(now())
 }

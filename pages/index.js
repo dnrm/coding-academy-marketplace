@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Navigation from '../components/Navigation'
 import Hero from '../components/Hero'
+import ProductList from '../components/ProductList'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       </Head>
       <Navigation />
       <Hero />
+      <ProductList />
     </div>
   )
 }

@@ -10,6 +10,7 @@ export default async function handler(req, res) {
     products: {},
     joinDate: new Date(),
     profilePicture: "https://avatars.dicebear.com/api/initials/u.svg",
+    products: [],
   };
 
   const add = await prisma.user.create({

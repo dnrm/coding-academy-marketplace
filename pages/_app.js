@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import { ProductWrapper } from "../context/ProductContext";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <ProductWrapper>
+      <Component {...pageProps} />
+    </ProductWrapper>
+  );
 }
 
-export default MyApp
+export default MyApp;
