@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ListProduct = ({ id, name, price, image }) => {
   return (
-    <div className="flex">
+    <div className="flex pb-4">
       <Link href={`/producto/${id}`}>
         <a>
           <div className="h-full w-64 md:w-96">
