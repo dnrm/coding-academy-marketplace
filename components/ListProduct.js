@@ -18,7 +18,7 @@ const ListProduct = ({ id, name, price, image }) => {
               />
             </div>
             <div className="info flex justify-between items-center">
-              <h1 className="text-xl md:text-4xl font-bold font-secondary">
+              <h1 className="text-xl md:text-4xl font-bold font-secondary text-neutral-700">
                 {name}
               </h1>
               <h2 className="font-secondary text-yellow-400 text-base md:text-2xl font-bold">

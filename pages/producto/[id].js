@@ -5,11 +5,7 @@ import ProductLayout from "../../components/ProductLayout";
 
 const Product = ({ product }) => {
   console.log(product);
-  return (
-    <ProductLayout product={product}>
-      
-    </ProductLayout>
-  );
+  return <ProductLayout product={product}></ProductLayout>;
 };
 
 export default Product;

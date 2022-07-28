@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: "Manrope, sans-serif",
-        secondary: "Space Grotesk, sans-serif",
-        tertiary: "Inter, sans-serif",
+        primary: "Nunito, sans-serif",
+        secondary: "Dosis, sans-serif",
+        tertiary: "Overpass, sans-serif",
       },
       lineHeight: {
         squish: "0.8"

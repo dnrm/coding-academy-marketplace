@@ -35,7 +35,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/">
-              <a className="text-neutral-800 font-primary font-bold">Inicio</a>
+              <a className="text-neutral-800 text-lg font-secondary font-bold">Inicio</a>
             </Link>
           </motion.div>
           <motion.div
@@ -45,7 +45,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/destacados">
-              <a className="text-neutral-800 font-primary font-bold">
+              <a className="text-neutral-800 text-lg font-secondary font-bold">
                 Destacados
               </a>
             </Link>
@@ -57,7 +57,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/mi-avatar">
-              <a className="text-neutral-800 font-primary font-bold">
+              <a className="text-neutral-800 text-lg font-secondary font-bold">
                 Mi Avatar
               </a>
             </Link>
@@ -69,7 +69,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/mi-perfil">
-              <a className="text-neutral-800 font-primary font-bold">
+              <a className="text-neutral-800 text-lg font-secondary font-bold">
                 Mi Perfil
               </a>
             </Link>
