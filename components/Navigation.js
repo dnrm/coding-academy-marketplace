@@ -35,7 +35,9 @@ const Navigation = () => {
             }}
           >
             <Link href="/">
-              <a className="text-neutral-800 text-lg font-secondary font-bold">Inicio</a>
+              <a className="text-neutral-800 text-lg font-secondary font-bold">
+                Inicio
+              </a>
             </Link>
           </motion.div>
           <motion.div
@@ -158,7 +160,7 @@ const Navigation = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="menu-mobile md:hidden w-full col-span-2 p-4">
+        <div className="menu-mobile md:hidden w-full border-b-2 col-span-2 p-4">
           <div className="balance font-primary font-bold text-yellow-500">
             <p>Mis puntos: {balance}</p>
           </div>
@@ -217,7 +219,7 @@ const Navigation = () => {
             >
               <Link href="/configuracion">
                 <a className="text-neutral-500 font-primary font-bold text-xl inline">
-                 Configuración
+                  Configuración
                 </a>
               </Link>
             </motion.div>
