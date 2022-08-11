@@ -1,17 +1,27 @@
-import { useContext, createContext } from "react";
-import useSWR from "swr";
+import { useContext, createContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 export const UserWrapper = ({ children }) => {
-  const userId = localStorage.getItem("coding-academy-user-id");
+  const [session, setSession] = useState(null);
 
-  const { data, error } = useSWR("/api/user/", fetcher);
+  const signOut = () => {
+    setSession(null);
+    localStorage.removeItem("coding-academy-user-id");
+    location.reload()
+  };
+
+  useEffect(() => {
+    const userId = localStorage.getItem("coding-academy-user-id");
+    if (!userId) {
+      setSession({ userId: null });
+    } else {
+      setSession({ userId });
+    }
+  }, []);
 
   return (
-    <UserContext.Provider value={{ data, error }}>
+    <UserContext.Provider value={{ session, signOut }}>
       {children}
     </UserContext.Provider>
   );

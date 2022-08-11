@@ -15,6 +15,7 @@ const Hero = () => {
       <div className="image h-full w-full relative bg-black">
         <Image
           src="/hero.jpeg"
+          priority={true}
           alt="Hero image"
           layout="fill"
           className="absolute opacity-70"
