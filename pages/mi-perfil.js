@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import Image from "next/image";
 import { useUserContext } from "../context/UserContext";
+import { PrismaClient } from "@prisma/client";
 
 const MyProfile = () => {
   const { session, signOut } = useUserContext();
@@ -91,7 +92,9 @@ const MyProfile = () => {
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span className="text-base md:text-lg pt-1">{ user && new Date(user.joinDate).toLocaleDateString() }</span>
+              <span className="text-base md:text-lg pt-1">
+                {user && new Date(user.joinDate).toLocaleDateString()}
+              </span>
             </div>
           </div>
         </div>
@@ -101,3 +104,17 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
+
+export async function getServerSideProps() {
+  const prisma = new PrismaClient();
+  const user = await prisma.user.findUnique({
+    where: {
+      id: 1,
+    },
+  });
+  return {
+    props: {
+      user,
+    },
+  };
+}
