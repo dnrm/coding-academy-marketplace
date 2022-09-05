@@ -5,6 +5,12 @@ const prisma = new PrismaClient();
 
 export default withIronSessionApiRoute(
   async function loginRoute(req, res) {
+    if (!req.body.id) {
+      return res.status(400).send({
+        error: "id-not-provided",
+      });
+    }
+
     const user = await prisma.user.findUnique({ where: { id: req.body.id } });
     if (!user) {
       return res.status(404).json({ error: "User not found" });

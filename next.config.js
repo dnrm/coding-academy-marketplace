@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["dodo.ac", "images.unsplash.com", "i.pinimg.com"],
+    domains: [
+      "dodo.ac",
+      "images.unsplash.com",
+      "i.pinimg.com",
+      "cdn.medina.dev",
+    ],
   },
 };
 

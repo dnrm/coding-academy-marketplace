@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useUserContext } from "../context/UserContext";
 
-const Navigation = () => {
-  const [balance, setBalance] = useState(0);
+const Navigation = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { session, signOut } = useUserContext();
 
   return (
     <div className="navigation">
@@ -80,8 +77,17 @@ const Navigation = () => {
           </motion.div>
         </div>
         <div className="menu justify-end items-center gap-2 text-neutral-800 hidden md:flex">
-          <div className="balance font-primary font-bold text-yellow-500">
-            <p>Mis puntos: {balance}</p>
+          <div className="balance font-primary font-bold text-teal-500">
+            <p>
+              Mis puntos:{" "}
+              {Intl.NumberFormat("en-US", {
+                style: "currency",
+                notation: "compact",
+                currency: "USD",
+              })
+                .format(session.balance)
+                .replace("$", "")}
+            </p>
           </div>
           <div className="settings cursor-pointer">
             <svg
@@ -111,7 +117,7 @@ const Navigation = () => {
               />
             </svg>
           </div>
-          <div className={`sign-out cursor-pointer ${session && session.userId != null ? 'inline' : 'hidden'}`} onClick={signOut}>
+          <div className={`sign-out cursor-pointer`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-10 w-10"
@@ -177,8 +183,17 @@ const Navigation = () => {
       </div>
       {isOpen && (
         <div className="menu-mobile md:hidden w-full border-b-2 col-span-2 p-4">
-          <div className="balance font-primary font-bold text-yellow-500">
-            <p>Mis puntos: {balance}</p>
+          <div className="balance font-primary font-bold text-teal-500">
+            <p>
+              Mis puntos:{" "}
+              {Intl.NumberFormat("en-US", {
+                style: "currency",
+                notation: "compact",
+                currency: "USD",
+              })
+                .format(session.balance)
+                .replace("$", "")}
+            </p>
           </div>
           <h1 className="text-5xl font-primary font-bold text-neutral-700 pb-2">
             Marketplace
