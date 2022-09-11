@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useUserContext } from "../context/UserContext";
 
-const Navigation = ({ session }) => {
+const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { session } = useUserContext();
 
   const logOut = async () => {
     const logOutRequest = await fetch("/api/logout");
-    console.log(logOutRequest);
     window.location.reload();
   };
 

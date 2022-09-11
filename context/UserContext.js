@@ -3,25 +3,25 @@ import { useContext, createContext, useState, useEffect } from "react";
 const UserContext = createContext();
 
 export const UserWrapper = ({ children }) => {
-  const [session, setSession] = useState(null);
-
-  const signOut = () => {
-    setSession(null);
-    localStorage.removeItem("coding-academy-user-id");
-    location.reload()
-  };
+  const [session, setSession] = useState({});
 
   useEffect(() => {
-    const userId = localStorage.getItem("coding-academy-user-id");
-    if (!userId) {
-      setSession({ userId: null });
-    } else {
-      setSession({ userId });
-    }
+    fetchSession();
   }, []);
 
+  const fetchSession = async () => {
+    const response = await fetch("/api/user");
+    const data = await response.json();
+
+    if (data) {
+      const fetchUser = await fetch("/api/user/" + data.user.id);
+      const user = await fetchUser.json();
+      setSession(user);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ session, signOut }}>
+    <UserContext.Provider value={{ session, setSession }}>
       {children}
     </UserContext.Provider>
   );

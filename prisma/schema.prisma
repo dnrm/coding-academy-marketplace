@@ -2,28 +2,44 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model User {
-  id             String   @id @default(uuid())
+  id             String      @id @default(uuid())
   name           String
   lastName       String
   balance        Int
   profilePicture String?
-  joinDate       DateTime @default(now())
+  joinDate       DateTime    @default(now())
+  Purchases      Purchases[]
+}
+
+model Purchases {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  date      DateTime @default(now())
+  price     Int
+  User      User     @relation(fields: [userId], references: [id])
+  Product   Product  @relation(fields: [productId], references: [id])
+
+  @@index([userId, productId])
 }
 
 model Product {
-  id          String    @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
   price       Int
   description String?
   image       String
-  createdAt   DateTime? @default(now())
+  createdAt   DateTime?   @default(now())
+  Purchases   Purchases[]
 }

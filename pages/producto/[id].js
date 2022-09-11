@@ -4,7 +4,6 @@ import Navigation from "../../components/Navigation";
 import ProductLayout from "../../components/ProductLayout";
 
 const Product = ({ product }) => {
-  console.log(product);
   return <ProductLayout product={product}></ProductLayout>;
 };
 

@@ -1,11 +1,30 @@
 import React from "react";
 import Navigation from "./Navigation";
 import Image from "next/image";
+import { useUserContext } from "../context/UserContext";
 
 const ProductLayout = ({ children, product }) => {
+  const { session } = useUserContext();
+
+  const purchaseItem = async () => {
+    const response = await fetch("/api/purchase", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        product,
+        session
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+
   return (
     <div className="bg-neutral-100 h-screen">
-      <Navigation />
+      <Navigation session={session} />
       <div className="content p-5 md:mt-16 max-w-6xl mx-auto flex justify-start items-start flex-wrap grow gap-4 bg-white rounded-lg">
         <div className="product-image relative h-96 w-full md:w-96 bg-gray-100 rounded-xl">
           <Image
@@ -36,7 +55,10 @@ const ProductLayout = ({ children, product }) => {
             </div>
           </div>
           <div className="purchase-button w-full">
-            <button className="bg-yellow-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">
+            <button
+              className="bg-yellow-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
+              onClick={purchaseItem}
+            >
               Comprar
             </button>
           </div>

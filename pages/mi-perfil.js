@@ -1,11 +1,11 @@
+import React from "react";
 import Image from "next/image";
-import { PrismaClient } from "@prisma/client";
 import Navigation from "../components/Navigation";
-import React, { useEffect, useState } from "react";
 import { withIronSessionSsr } from "iron-session/next";
-import { useUserContext } from "../context/UserContext";
+import { getUserProducts, getUserFromSession } from "../lib/database";
 
-const MyProfile = ({ user }) => {
+const MyProfile = ({ user, purchases }) => {
+  console.log(purchases[0].Product.name);
   return (
     <div>
       <Navigation session={user} />
@@ -17,7 +17,7 @@ const MyProfile = ({ user }) => {
           objectFit="cover"
         ></Image>
       </div>
-      <div className="user-info px-5 md:px-10 ">
+      <div className="user-info px-5 md:px-10">
         <div className="content relative -top-36">
           <div className="bg-neutral-200 p-5 profile-picture h-44 md:h-52 w-44 md:w-52 relative rounded-full border-8 border-white shadow-lg grid place-items-center">
             <svg
@@ -85,6 +85,35 @@ const MyProfile = ({ user }) => {
               </span>
             </div>
           </div>
+          <div className="purchased-products py-5">
+            <div className="title">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-primary tracking-tighter pb-2">
+                Purchased Products
+              </h1>
+            </div>
+            <div className="products grid grid-cols-2 md:grid-cols-4 gap-4">
+              {purchases.map((purchase) => {
+                const { Product } = purchase;
+                return (
+                  <div
+                    key={purchase.id}
+                    className="product bg-gray-100 p-5 grid place-items-center"
+                  >
+                    <Image
+                      src={Product.image}
+                      alt="Product image"
+                      height={100}
+                      width={100}
+                      objectFit={"cover"}
+                    />
+                    <h1 className="text-2xl font-bold font-secondary">
+                      {purchase.Product.name}
+                    </h1>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -95,18 +124,14 @@ export default MyProfile;
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
-    const prisma = new PrismaClient();
-
     if (req.session.user) {
-      const user = await prisma.user.findUnique({
-        where: {
-          id: req.session.user.id,
-        },
-      });
+      const user = await getUserFromSession(req.session.user.id);
+      const purchases = await getUserProducts(user.id);
 
       return {
         props: {
           user: JSON.parse(JSON.stringify(user)),
+          purchases: JSON.parse(JSON.stringify(purchases)),
         },
       };
     }
