@@ -1,5 +1,3 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
 import { getUserFromSession, createPurchase } from "../../lib/database";
 
 export default async function handler(req, res) {

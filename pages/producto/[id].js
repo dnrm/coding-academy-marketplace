@@ -1,6 +1,5 @@
 import React from "react";
-import { PrismaClient } from "@prisma/client";
-import Navigation from "../../components/Navigation";
+import { prisma } from "../../lib/database";
 import ProductLayout from "../../components/ProductLayout";
 
 const Product = ({ product }) => {
@@ -10,7 +9,6 @@ const Product = ({ product }) => {
 export default Product;
 
 export async function getServerSideProps(context) {
-  const prisma = new PrismaClient();
   const product = await prisma.product.findUnique({
     where: { id: context.query.id },
   });

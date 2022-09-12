@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: "Nunito, sans-serif",
+        primary: "Poppins, sans-serif",
         secondary: "Dosis, sans-serif",
         tertiary: "Overpass, sans-serif",
       },

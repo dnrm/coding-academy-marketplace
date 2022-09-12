@@ -1,7 +1,5 @@
 import { withIronSessionApiRoute } from "iron-session/next";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../lib/database";
 
 export default withIronSessionApiRoute(
   async function loginRoute(req, res) {
