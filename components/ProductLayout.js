@@ -41,7 +41,7 @@ const ProductLayout = ({ children, product }) => {
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold font-primary tracking-tighter">
                 {product.name}
               </h1>
-              <p className="text-xl md:text-4xl text-yellow-400 font-bold font-secondary">
+              <p className="text-xl md:text-4xl text-teal-400 font-bold font-secondary">
                 ${product.price}
               </p>
             </div>
@@ -56,7 +56,7 @@ const ProductLayout = ({ children, product }) => {
           </div>
           <div className="purchase-button w-full">
             <button
-              className="bg-yellow-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
+              className="bg-teal-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-500"
               onClick={purchaseItem}
             >
               Comprar
