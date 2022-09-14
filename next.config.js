@@ -7,6 +7,7 @@ const nextConfig = {
       "images.unsplash.com",
       "i.pinimg.com",
       "cdn.medina.dev",
+      "res.cloudinary.com",
     ],
   },
 };
