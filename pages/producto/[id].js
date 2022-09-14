@@ -8,14 +8,25 @@ const Product = ({ product }) => {
 
 export default Product;
 
-export async function getServerSideProps(context) {
+export async function getStaticProps({ params }) {
   const product = await prisma.product.findUnique({
-    where: { id: context.query.id },
+    where: { id: params.id },
   });
 
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
     },
+    revalidate: process.env.REVALIDATE_TIME || 10,
   };
+}
+
+export async function getStaticPaths() {
+  const products = await prisma.product.findMany();
+
+  const paths = products.map((product) => ({
+    params: { id: product.id.toString() },
+  }));
+
+  return { paths, fallback: "blocking" };
 }
