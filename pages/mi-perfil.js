@@ -125,15 +125,24 @@ export default MyProfile;
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     if (req.session.user) {
-      const user = await getUserFromSession(req.session.user.id);
-      const purchases = await getUserProducts(user.id);
+      try {
+        const user = await getUserFromSession(req.session.user.id);
+        const purchases = await getUserProducts(user.id);
 
-      return {
-        props: {
-          user: JSON.parse(JSON.stringify(user)),
-          purchases: JSON.parse(JSON.stringify(purchases)),
-        },
-      };
+        return {
+          props: {
+            user: JSON.parse(JSON.stringify(user)),
+            purchases: JSON.parse(JSON.stringify(purchases)),
+          },
+        };
+      } catch (e) {
+        return {
+          redirect: {
+            destination: "/",
+            permanent: false,
+          },
+        };
+      }
     }
 
     return {

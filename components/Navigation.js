@@ -41,7 +41,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/">
-              <a className="text-neutral-800 text-lg font-secondary font-bold">
+              <a className="text-neutral-800 text-base font-sans font-medium">
                 Inicio
               </a>
             </Link>
@@ -53,7 +53,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/destacados">
-              <a className="text-neutral-800 text-lg font-secondary font-bold">
+              <a className="text-neutral-800 text-base font-sans font-medium">
                 Destacados
               </a>
             </Link>
@@ -65,7 +65,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/mi-avatar">
-              <a className="text-neutral-800 text-lg font-secondary font-bold">
+              <a className="text-neutral-800 text-base font-sans font-medium">
                 Mi Avatar
               </a>
             </Link>
@@ -77,7 +77,7 @@ const Navigation = () => {
             }}
           >
             <Link href="/mi-perfil">
-              <a className="text-neutral-800 text-lg font-secondary font-bold">
+              <a className="text-neutral-800 text-base font-sans font-medium">
                 Mi Perfil
               </a>
             </Link>
@@ -85,16 +85,13 @@ const Navigation = () => {
         </div>
         {session ? (
           <div className="menu justify-end items-center gap-2 text-neutral-800 hidden md:flex">
-            <div className="balance font-primary font-bold text-teal-500">
+            <div className="balance font-sans font-medium text-teal-500">
               <p>
-                Mis puntos:{" "}
                 {Intl.NumberFormat("en-US", {
                   style: "currency",
                   notation: "compact",
                   currency: "USD",
-                })
-                  .format(session.balance)
-                  .replace("$", "")}
+                }).format(session.balance)}
               </p>
             </div>
             <div className="settings cursor-pointer">

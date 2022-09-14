@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Hero from "../components/Hero";
+import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import ProductList from "../components/ProductList";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <ProductList />
+      <Footer />
     </div>
   );
 }
