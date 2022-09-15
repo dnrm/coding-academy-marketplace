@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { BarLoader } from "react-spinners";
+import { toast } from "react-hot-toast";
 import Navigation from "../components/Navigation";
 
 const SignIn = ({ id }) => {

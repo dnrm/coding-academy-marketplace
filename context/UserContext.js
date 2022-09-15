@@ -13,11 +13,14 @@ export const UserWrapper = ({ children }) => {
     const response = await fetch("/api/user");
     const data = await response.json();
 
-    if (data) {
+    if (!data.error) {
       const fetchUser = await fetch("/api/user/" + data.user.id);
       const user = await fetchUser.json();
       setSession(user);
+      return;
     }
+
+    setSession(null);
   };
 
   return (
