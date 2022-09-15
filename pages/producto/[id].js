@@ -17,7 +17,7 @@ export async function getStaticProps({ params }) {
     props: {
       product: JSON.parse(JSON.stringify(product)),
     },
-    revalidate: process.env.REVALIDATE_TIME || 10,
+    revalidate: parseInt(process.env.REVALIDATE_TIME) || 10,
   };
 }
 
