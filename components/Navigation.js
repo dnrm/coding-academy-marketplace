@@ -116,7 +116,7 @@ const Navigation = () => {
             </div>
           </div>
         ) : (
-          <div className="login justify-end items-center md:flex gap-2 px-2">
+          <div className="login justify-end items-center gap-2 px-2 hidden md:flex">
             <svg
               onClick={() => {
                 toast("Solicite un link a su profesor para iniciar sesión.", {
@@ -188,33 +188,35 @@ const Navigation = () => {
       </div>
       {isOpen && (
         <div className="menu-mobile md:hidden w-full border-b-2 col-span-2 p-4">
-          <div className="balance font-primary font-bold text-teal-500 flex justify-start items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.8}
-              stroke="currentColor"
-              className="w-8 h-8"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          {session?.balance ? (
+            <div className="balance font-primary font-bold text-teal-500 flex justify-start items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.8}
+                stroke="currentColor"
+                className="w-8 h-8"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
 
-            <p>
-              Mis puntos:{" "}
-              {Intl.NumberFormat("en-US", {
-                style: "currency",
-                notation: "compact",
-                currency: "USD",
-              })
-                .format(session.balance)
-                .replace("$", "")}
-            </p>
-          </div>
+              <p>
+                Mis puntos:{" "}
+                {Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  notation: "compact",
+                  currency: "USD",
+                })
+                  .format(session.balance)
+                  .replace("$", "")}
+              </p>
+            </div>
+          ) : null}
           <h1 className="text-5xl font-primary font-bold text-neutral-700 pb-2">
             Marketplace
           </h1>
@@ -249,17 +251,6 @@ const Navigation = () => {
               <Link href="/mi-perfil">
                 <a className="text-neutral-500 font-sans font-semibold text-base inline">
                   Mi Perfil
-                </a>
-              </Link>
-            </motion.div>
-            <motion.div
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}
-            >
-              <Link href="/configuracion">
-                <a className="text-neutral-500 font-sans font-semibold text-base inline">
-                  Configuración
                 </a>
               </Link>
             </motion.div>
