@@ -8,6 +8,7 @@ const nextConfig = {
       "i.pinimg.com",
       "cdn.medina.dev",
       "res.cloudinary.com",
+      "squishmallows.com"
     ],
   },
 };

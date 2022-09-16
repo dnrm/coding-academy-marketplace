@@ -1,37 +1,34 @@
 import React from "react";
 import Image from "next/image";
+import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
+import ListProduct from "../components/ListProduct";
 import { withIronSessionSsr } from "iron-session/next";
 import { getUserProducts, getUserFromSession } from "../lib/database";
 
 const MyProfile = ({ user, purchases }) => {
-  console.log(purchases[0].Product.name);
+  console.log(purchases);
   return (
     <div>
       <Navigation session={user} />
       <div className="hero-image w-full h-80 relative">
         <Image
-          src={"/moon.jpeg"}
+          src={"/profilebg.jpeg"}
           alt="background iamge"
           layout="fill"
           objectFit="cover"
         ></Image>
       </div>
       <div className="user-info px-5 md:px-10">
-        <div className="content relative -top-36">
-          <div className="bg-neutral-200 p-5 profile-picture h-44 md:h-52 w-44 md:w-52 relative rounded-full border-8 border-white shadow-lg grid place-items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-full h-full text-teal-500"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                clipRule="evenodd"
-              />
-            </svg>
+        <div className="content relative -top-36 -mb-36">
+          <div className="bg-neutral-200 p-5 profile-picture h-44 md:h-52 w-44 md:w-52 relative rounded-full border-8 border-white shadow-lg">
+            <Image
+              src={user.profilePicture}
+              alt="Profile picture"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-full"
+            />
           </div>
           <div className="name pt-4">
             <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold font-primary tracking-tighter">
@@ -85,37 +82,53 @@ const MyProfile = ({ user, purchases }) => {
               </span>
             </div>
           </div>
-          <div className="purchased-products py-5">
-            <div className="title">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-primary tracking-tighter pb-2">
-                Purchased Products
-              </h1>
-            </div>
-            <div className="products grid grid-cols-2 md:grid-cols-4 gap-4">
-              {purchases.map((purchase) => {
+        </div>
+        <div className="purchased-products py-5 pb-10">
+          <div className="title">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-primary tracking-tighter pb-2">
+              Purchased Products
+            </h1>
+          </div>
+          <div className="products grid grid-cols-2 md:grid-cols-4 gap-4">
+            {purchases.length > 0 ? (
+              purchases.map((purchase) => {
                 const { Product } = purchase;
                 return (
-                  <div
-                    key={purchase.id}
-                    className="product bg-gray-100 p-5 grid place-items-center"
-                  >
-                    <Image
-                      src={Product.image}
-                      alt="Product image"
-                      height={100}
-                      width={100}
-                      objectFit={"cover"}
-                    />
-                    <h1 className="text-2xl font-bold font-secondary">
-                      {purchase.Product.name}
-                    </h1>
-                  </div>
+                  <ListProduct
+                    key={Product.id}
+                    id={Product.id}
+                    name={Product.name}
+                    price={Product.price}
+                    image={Product.image}
+                  />
                 );
-              })}
-            </div>
+              })
+            ) : (
+              <div className="no-products w-full bg-gray-100 rounded-xl col-span-4 p-5 flex flex-col justify-center items-center min-h-[50vh]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-20 h-20 text-teal-500"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+
+                <h1 className="text-xl font-medium font-sans">
+                  No products purchased yet
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

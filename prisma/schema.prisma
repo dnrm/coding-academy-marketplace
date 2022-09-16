@@ -38,8 +38,17 @@ model Product {
   id          String      @id @default(uuid())
   name        String
   price       Int
-  description String?
+  description String? @db.Text()
   image       String
-  createdAt   DateTime?   @default(now())
+  categoryId  String
   Purchases   Purchases[]
+  createdAt   DateTime?   @default(now())
+  Category    Category?   @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime? @default(now())
+  Product   Product[]
 }

@@ -1,19 +1,30 @@
 import Head from "next/head";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
+import { getAllProducts } from "../lib/database";
 import Navigation from "../components/Navigation";
 import ProductList from "../components/ProductList";
 
-export default function Home() {
+export default function Home({ products }) {
   return (
-    <div className="">
+    <>
       <Head>
         <title>Coding Academy Marketplace | Inicio</title>
       </Head>
       <Navigation />
       <Hero />
-      <ProductList />
+      <ProductList products={products} />
       <Footer />
-    </div>
+    </>
   );
+}
+
+export async function getServerSideProps() {
+  const products = await getAllProducts();
+
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    },
+  };
 }

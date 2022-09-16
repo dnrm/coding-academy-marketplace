@@ -1,12 +1,18 @@
 import React from "react";
 import Navigation from "./Navigation";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 import { useUserContext } from "../context/UserContext";
 
 const ProductLayout = ({ children, product }) => {
   const { session } = useUserContext();
 
   const purchaseItem = async () => {
+    if (!session) {
+      toast.error("Debes iniciar sesión para comprar este producto");
+      return;
+    }
+
     const response = await fetch("/api/purchase", {
       method: "POST",
       headers: {
@@ -14,9 +20,13 @@ const ProductLayout = ({ children, product }) => {
       },
       body: JSON.stringify({
         product,
-        session
+        session,
       }),
     });
+
+    if (response.ok) {
+      toast.success("¡Producto comprado con éxito!");
+    }
 
     const data = await response.json();
     console.log(data);
@@ -56,10 +66,13 @@ const ProductLayout = ({ children, product }) => {
           </div>
           <div className="purchase-button w-full">
             <button
-              className="bg-teal-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-500"
+              className={`bg-teal-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-500 disabled:bg-neutral-300 ${
+                session ? "" : "cursor-not-allowed"
+              }`}
+              disabled={!session}
               onClick={purchaseItem}
             >
-              Comprar
+              {session ? "Comprar" : "Inicia sesión para comprar"}
             </button>
           </div>
         </div>

@@ -6,8 +6,8 @@ const ListProduct = ({ id, name, price, image }) => {
   return (
     <div className="flex px-4 pt-4 border-[1px] border-neutral-300 rounded-lg">
       <Link href={`/producto/${id}`}>
-        <a>
-          <div className="h-full w-64 md:w-96">
+        <a className="w-full">
+          <div className="h-full w-full">
             <div className="bg-neutral-100 flex justify-center items-center h-64 md:h-96 relative w-full rounded-lg">
               <Image
                 layout="fill"
