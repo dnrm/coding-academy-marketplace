@@ -89,7 +89,7 @@ const MyProfile = ({ user, purchases }) => {
               Purchased Products
             </h1>
           </div>
-          <div className="products grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="products grid grid-cols-1 md:grid-cols-4 gap-4">
             {purchases.length > 0 ? (
               purchases.map((purchase) => {
                 const { Product } = purchase;

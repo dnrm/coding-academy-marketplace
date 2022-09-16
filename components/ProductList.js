@@ -9,7 +9,7 @@ const ProductList = ({ products }) => {
       <h1 className="text-xl md:text-4xl lg:text-4xl font-bold font-primary tracking-tighter pb-2">
         Más Vendidos ⭐️
       </h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex-nowrap overflow-x-auto overflow-y-hidden gap-4 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 flex-nowrap overflow-x-auto overflow-y-hidden gap-4 md:gap-8">
         {productData &&
           productData.map(({ id, name, price, image }) => {
             return (

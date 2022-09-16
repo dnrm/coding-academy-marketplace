@@ -6,9 +6,9 @@ const Hero = () => {
     <div className="w-full h-[50vh]">
       <div className="content flex justify-center items-center h-[50vh] w-full flex-col z-10 absolute gap-8">
         <h1 className="text-6xl md:text-8xl text-white font-bold font-primary text-center leading-squish tracking-tighter">
-          ¡Arma tu avatar <br /> favorito!
+          Coding Academy Marketplace
         </h1>
-        <button className="bg-white opacity-90 px-24 text-lg py-2 rounded-lg font-sans tracking-wider font-semibold">
+        <button className="bg-white opacity-90 px-24 text-lg py-2 rounded-lg font-sans tracking-tight text-neutral-700 font-semibold">
           Ver más →
         </button>
       </div>
