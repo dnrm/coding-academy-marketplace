@@ -11,9 +11,6 @@ export default Product;
 export async function getStaticProps({ params }) {
   const product = await prisma.product.findUnique({
     where: { id: params.id },
-    include: {
-      Category: true,
-    }
   });
 
   return {
