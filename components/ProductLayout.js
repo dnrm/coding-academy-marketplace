@@ -50,7 +50,7 @@ const ProductLayout = ({ children, product }) => {
         </div>
         <div className="heading flex flex-col justify-between items-start h-96 flex-grow">
           <div className="product-information flex-col justify-between items-center h-full w-full">
-            <span className="text-neutral-500">{product.Category.name}</span>
+            {/* <span className="text-neutral-500">{product.Category.name}</span> */}
             <div className="flex justify-between items-center w-full gap-4">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold font-primary tracking-tighter">
                 {product.name}
