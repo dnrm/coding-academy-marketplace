@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Navigation from "./Navigation";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useUserContext } from "../context/UserContext";
+import { ClipLoader } from "react-spinners";
 
 const ProductLayout = ({ children, product }) => {
   const { session } = useUserContext();
+  const [purchasing, setPurchasing] = useState(false);
 
   const purchaseItem = async () => {
+    setPurchasing(true);
     if (!session) {
       toast.error("Debes iniciar sesión para comprar este producto");
       return;
@@ -29,7 +32,7 @@ const ProductLayout = ({ children, product }) => {
     }
 
     const data = await response.json();
-    console.log(data);
+    setPurchasing(false);
   };
 
   return (
@@ -67,13 +70,21 @@ const ProductLayout = ({ children, product }) => {
           </div>
           <div className="purchase-button w-full">
             <button
-              className={`bg-teal-400 w-full text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-500 disabled:bg-neutral-300 ${
+              className={`bg-teal-400 w-full flex justify-center items-center h-12 text-white font-bold py-2 px-2 rounded-lg hover:bg-teal-500 disabled:bg-neutral-300 ${
                 session ? "" : "cursor-not-allowed"
               }`}
               disabled={!session}
               onClick={purchaseItem}
             >
-              {session ? "Comprar" : "Inicia sesión para comprar"}
+              {session ? (
+                purchasing ? (
+                  <ClipLoader size={24} color="#fffff" />
+                ) : (
+                  "Comprar"
+                )
+              ) : (
+                "Inicia sesión para comprar"
+              )}
             </button>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="font-primary border-t-2 border-neutral-300 px-5">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-16">
+      <div className="max-w-7xl mx-auto flex flex-col gap-2 md:flex-row justify-between items-center py-16">
         <h1 className="text-xl md:text-2xl font-bold">
           Coding Academy Marketplace
         </h1>
